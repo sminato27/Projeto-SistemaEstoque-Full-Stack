@@ -147,7 +147,7 @@ O projeto será expandido com as seguintes funcionalidades:
   - Proteção de endpoints com tokens de acesso.
 
 - **Docker Compose**:
-  - Configuração de containers para backend, frontend e banco de dados.
+  - Configuração de containers para ~~backend~~, frontend e ~~banco de dados~~.
   - Facilitação do desenvolvimento e deploy com isolamento de ambientes.
 
 - **Testes Unitários Front e Back**:
