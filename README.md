@@ -102,11 +102,11 @@ src/
 4. A API estará disponível em `http://localhost:8080`
 
 ### Endpoints da API
-- `GET /produtos` - Lista todos os produtos
-- `GET /produtos/{id}` - Busca produto por ID
-- `POST /produtos` - Cria um novo produto
-- `PUT /produtos/{id}` - Atualiza um produto existente
-- `DELETE /produtos/{id}` - Deleta um produto
+- `GET /api/produtos` - Lista todos os produtos
+- `GET /api/produtos/{id}` - Busca produto por ID
+- `POST /api/produtos` - Cria um novo produto
+- `PUT /api/produtos/{id}` - Atualiza um produto existente
+- `DELETE /api/produtos/{id}` - Deleta um produto
 
 Exemplo de requisição POST:
 ```json
