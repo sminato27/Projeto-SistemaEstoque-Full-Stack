@@ -137,10 +137,10 @@ O projeto será expandido com as seguintes funcionalidades:
   - Configuração de Jest + React Testing Library para testes de componentes.
   - Execução de testes unitários com `npm test`.
 
-- **Swagger e Autenticação JWT**:
-  - Adição de Swagger com SpringDoc OpenAPI para documentação interativa da API.
-  - Implementação de autenticação básica JWT com Spring Security.
-  - Documentação de endpoints via SwaggerUI com token JWT funcional.
+- **~~Swagger e Autenticação JWT~~**:
+  - ~~Adição de Swagger com SpringDoc OpenAPI para documentação interativa da API.~~
+  - ~~Implementação de autenticação básica JWT com Spring Security.~~
+  - ~~Documentação de endpoints via SwaggerUI com token JWT funcional.~~
 
 - **CRUD Completo com Autenticação**:
   - Refatoração do CRUD para incluir autenticação JWT obrigatória.
