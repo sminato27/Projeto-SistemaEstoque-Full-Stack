@@ -23,6 +23,8 @@ public class RegistroRequestDTO {
     @Email(message = "Informe um email válido")
     private String email;
 
+
+    // A senha que o usuário digita chega em texto puro. No Service é feito o hash antes de salvar no banco.
     @NotBlank(message = "A senha é obrigatória")
     @Size(min = 6, message = "A senha deve ter no mínimo 6 caractéres")
     private String senha;

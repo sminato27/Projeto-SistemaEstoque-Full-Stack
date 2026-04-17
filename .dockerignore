@@ -6,5 +6,5 @@ README.md
 .env
 frontend/node_modules
 frontend/.next
-target/
+target
 *.log

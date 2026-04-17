@@ -1,22 +1,38 @@
-# ------------------- Stage 1: Build -------------------
-FROM maven:3.9.6-eclipse-temurin-21 AS build
-WORKDIR /app
+# syntax=docker/dockerfile:1.7
+
+############################################
+# Stage 1 — Build
+############################################
+FROM maven:3.9.9-eclipse-temurin-21 AS builder
+
+WORKDIR /build
 
 COPY pom.xml .
 COPY .mvn .mvn
-COPY mvnw mvnw
-COPY mvnw.cmd mvnw.cmd
+COPY mvnw .
 
-RUN ./mvnw dependency:go-offline -B
+RUN chmod +x mvnw
 
-COPY src ./src
-RUN ./mvnw clean package -DskipTests
+RUN ./mvnw -B -DskipTests package
 
-# ------------------- Stage 2: Runtime -------------------
-FROM eclipse-temurin:21-jre-alpine
+COPY src src
+
+RUN ./mvnw -B -DskipTests package
+
+
+############################################
+# Stage 2 — Runtime
+############################################
+FROM eclipse-temurin:21-jre-jammy
+
 WORKDIR /app
 
-COPY --from=build /app/target/*.jar app.jar
+RUN useradd -ms /bin/bash spring
+
+COPY --from=builder /build/target/*.jar app.jar
+
+USER spring
 
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+
+ENTRYPOINT ["java","-jar","/app/app.jar"]

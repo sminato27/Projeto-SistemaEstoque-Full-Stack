@@ -68,7 +68,8 @@ public class ProdutoController {
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Produto criado com sucesso."),
             @ApiResponse(responseCode = "400", description = "Dados inválidos."),
-            @ApiResponse(responseCode = "401", description = "Não autenticado. Faça login primeiro.")
+            @ApiResponse(responseCode = "401", description = "Não autenticado. Faça login primeiro."),
+            @ApiResponse(responseCode = "403", description = "Você não tem permissão para fazer isso.")
     })
     @PostMapping
     public ResponseEntity<ProdutoResponseDTO> criar(@Valid @RequestBody ProdutoRequestDTO request) {
@@ -79,7 +80,16 @@ public class ProdutoController {
     // PUT /api/produtos/5 > atualiza o produto com id 5
     // Recebe o ID pela URL e os novos dados pelo corpo (JSON)
     // Retorna 200 OK com o produto atualizado
-    @Operation(summary = "Atualizar produto existente")
+    @Operation(
+            summary = "Atualizar produto existente",
+            description = "Requer autenticação JWT. Atualiza um produto do estoque.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso."),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos."),
+            @ApiResponse(responseCode = "401", description = "Não autenticado. Faça login primeiro."),
+            @ApiResponse(responseCode = "403", description = "Você não tem permissão para fazer isso."),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado.")
+    })
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponseDTO> atualizar(@PathVariable Long id, @Valid @RequestBody ProdutoRequestDTO request) {
         ProdutoResponseDTO produto = produtoService.atualizar(id, request);
@@ -89,11 +99,15 @@ public class ProdutoController {
     // DELETE /api/produto/5 > deleta o produto com id 5
     // ReponseEntity<Void> = a resposta não tem corpo (Void)
     // 204 No Content = código HTTP correto para deleção bem-sucedida: "deu certo, mas não tenho nada pra te retornar"
-    @Operation(summary = "Deletar produto pelo ID")
+    @Operation(
+            summary = "Deletar produto pelo ID",
+            description = "Requer autenticação JWT. Deleta um produto do estoque."
+    )
     @ApiResponses({
             @ApiResponse(responseCode = "204", description = "Produto deletado com sucesso."),
-            @ApiResponse(responseCode = "404", description = "Produto não encontrado."),
-            @ApiResponse(responseCode = "401", description = "Não autenticado.")
+            @ApiResponse(responseCode = "401", description = "Não autenticado. Faça login primeiro."),
+            @ApiResponse(responseCode = "403", description = "Você não tem permissão para fazer isso."),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado.")
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {

@@ -11,10 +11,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import tools.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sminato.sistemaestoque.service.JwtService;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -28,6 +31,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(controllers = {ProdutoController.class, GlobalExceptionHandler.class})
+@AutoConfigureMockMvc(addFilters = false)
 /*
     @WebMvcTest = sobe apenas a camada web do Spring. Ideal para testar endpoints HTTP de forma isolada.
  */
@@ -56,8 +60,14 @@ public class ProdutoControllerTest {
         @Mock = Mockito puro, fora do Spring.
         @MockitoBean = mock integrado ao contexto do Spring. Utilizado quando o Spring precisa gerenciar a injeção.
      */
-    @MockitoBean
+    @MockBean
     private ProdutoService produtoService;
+
+    @MockBean
+    private JwtService jwtService;
+
+    @MockBean
+    private UserDetailsService userDetailsService;
 
     // Dados reutilizáveis
     private ProdutoResponseDTO responseDTO;

@@ -10,7 +10,7 @@ import java.util.List;
 public interface IProdutoRepository extends JpaRepository<Produto, Long> {
 
     /*
-       Query Methods — o Spring Data cria a query pelo nome do método.
+       Query Methods — o Spring Data cria a query pelo nome do métod0.
 
        findByNomeContainingIgnoreCase:
        - findBy         = SELECT ... WHERE

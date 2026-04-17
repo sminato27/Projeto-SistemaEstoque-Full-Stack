@@ -17,9 +17,9 @@ import org.springframework.context.annotation.Configuration;
         info = @Info(
                 title = "Sistema de Estoque API",
                 version = "1.0",
-                description = "API REST para gerenciamento de estoque de produtos." +
+                description = "API REST para gerenciamento de estoque de produtos. " +
                         "Para usar endpoints protegidos: faça login em /api/auth/login, " +
-                        "copie o token retornado e cole no botão 'Authorize' acima.",
+                        "copie o token retornado e cole no botão 'Authorize' abaixo.",
                 contact = @Contact(
                         name = "Guilherme A. Paim",
                         url = "https://github.com/sminato27"
